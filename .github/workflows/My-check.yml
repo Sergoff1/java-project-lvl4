@@ -12,6 +12,7 @@ jobs:
       - name: Set up openJDK
         uses: actions/setup-java@v2
         with:
+          distribution: 'temurin'
           java-version: '16'
       - name: Build with Gradle
         run: make build
