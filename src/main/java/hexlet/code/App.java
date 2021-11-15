@@ -13,7 +13,7 @@ public final class App {
     public static Javalin getApp() {
         Javalin app = Javalin.create(JavalinConfig::enableDevLogging);
 
-        app.get("/", ctx -> ctx.result("Hello World"));
+        app.get("/", ctx -> ctx.result("Hello World!"));
 
         return app;
     }
