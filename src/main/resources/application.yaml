@@ -1,0 +1,9 @@
+datasource:
+  db:
+    username: sa
+    password: sa
+    url: jdbc:h2:./database
+
+ebean:
+  migration:
+    run: true
