@@ -38,11 +38,11 @@ public final class App {
         app.get("/", RootController.welcome);
 
         app.routes(() -> {
-           path("urls", () -> {
-               get(UrlController.listUrls);
-               post(UrlController.createUrl);
-               get("{id}", UrlController.showUrl);
-           });
+            path("urls", () -> {
+                get(UrlController.listUrls);
+                post(UrlController.createUrl);
+                get("{id}", UrlController.showUrl);
+            });
         });
     }
 
