@@ -20,22 +20,32 @@ public final class UrlController {
     };
 
     public static Handler showUrl = ctx -> {
+        long id = ctx.pathParamAsClass("id", Long.class).getOrDefault(null);
 
+        Url url = new QUrl()
+                .id.equalTo(id)
+                .findOne();
+
+        ctx.attribute("url", url);
+
+        ctx.render("urls/show.html");
     };
 
     public static Handler createUrl = ctx -> {
         try {
-            String authorityUrl = new URL(ctx.formParam("url")).getAuthority();
+
+            URL url = new URL(ctx.formParam("url"));
+            String normalizedUrl = url.getProtocol() + "://" + url.getAuthority();
 
             boolean urlExist = new QUrl()
-                    .name.equalTo(authorityUrl)
+                    .name.equalTo(normalizedUrl)
                     .exists();
 
             if (urlExist) {
                 ctx.sessionAttribute("flash", "Страница уже существует");
                 ctx.sessionAttribute("flash-type", "info");
             } else {
-                new Url(authorityUrl).save();
+                new Url(normalizedUrl).save();
 
                 ctx.sessionAttribute("flash", "Страница успешно добавлена");
                 ctx.sessionAttribute("flash-type", "success");
