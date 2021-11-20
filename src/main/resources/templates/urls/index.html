@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/application.html}">
+
+    <section layout:fragment="content">
+        <table class="table">
+            <thead>
+            <th>ID</th>
+            <th>Имя</th>
+            <th>Последняя проверка</th>
+            <th>Код ответа</th>
+            </thead>
+            <tbody>
+            <tr th:each="url : ${urls}" th:object="${url}">
+                <td th:text="*{id}"></td>
+                <td>
+                    <a th:text="*{name}" th:href="@{/urls/{id}(id=*{id})}"></a>
+                </td>
+            </tr>
+        </table>
+</section>
+
+</html>
