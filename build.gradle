@@ -32,6 +32,7 @@ dependencies {
     implementation 'org.webjars:bootstrap:5.1.1'
 
     implementation 'com.h2database:h2:1.4.200'
+    implementation 'org.postgresql:postgresql:42.3.1'
 
     implementation 'io.ebean:ebean:12.13.0'
     implementation 'io.ebean:ebean-ddl-generator:12.13.0'
