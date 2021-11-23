@@ -45,13 +45,12 @@ public final class App {
     private static void addRoutes(Javalin app) {
         app.get("/", RootController.welcome);
 
-        app.routes(() -> {
-            path("urls", () -> {
-                get(UrlController.listUrls);
-                post(UrlController.createUrl);
-                get("{id}", UrlController.showUrl);
-            });
-        });
+        app.routes(() -> path("urls", () -> {
+            get(UrlController.listUrls);
+            post(UrlController.createUrl);
+            get("{id}", UrlController.showUrl);
+            post("{id}/checks", UrlController.checkUrl);
+        }));
     }
 
     public static Javalin getApp() {
@@ -65,9 +64,7 @@ public final class App {
 
         addRoutes(app);
 
-        app.before(ctx -> {
-            ctx.attribute("ctx", ctx);
-        });
+        app.before(ctx -> ctx.attribute("ctx", ctx));
 
         return app;
     }

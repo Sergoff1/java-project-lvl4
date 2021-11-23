@@ -25,6 +25,7 @@ application {
 dependencies {
     implementation 'io.javalin:javalin:4.1.1'
     implementation 'org.slf4j:slf4j-simple:1.7.32'
+    implementation 'com.konghq:unirest-java:3.13.3'
 
     implementation 'org.thymeleaf:thymeleaf:3.0.12.RELEASE'
     implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.0.0'
@@ -48,7 +49,7 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-params:5.8.1'
     testImplementation 'org.assertj:assertj-core:3.21.0'
     testImplementation 'io.ebean:ebean-test:12.13.0'
-    testImplementation 'com.konghq:unirest-java:3.13.0'
+    testImplementation("com.squareup.okhttp3:mockwebserver:4.9.2")
 }
 
 test {
