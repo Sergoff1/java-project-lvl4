@@ -172,25 +172,45 @@ public final class AppTest {
             assertThat(body).doesNotContain(inputUrl);
             assertThat(body).contains("Некорректный URL");
 
-            Url actualArticle = new QUrl()
+            Url actualUrl = new QUrl()
                     .name.equalTo(inputUrl)
                     .findOne();
 
-            assertThat(actualArticle).isNull();
+            assertThat(actualUrl).isNull();
         }
 
         @Test
         void testCheckUrl() {
-            String gitHubDescription = "GitHub is where over 73 million developers shape the future of software.";
-            String gitHubTitle = "GitHub: Where the world builds software · GitHub";
-            String gitHubH1 = "Where the world builds software";
+            String mockDescription = "GitHub is where over 73 million";
+            String mockTitle = "GitHub: Where the";
+            String mockH1 = "Where the world";
 
             String mockUrl = mockWebServer.url("/").toString();
 
-            HttpResponse<String> response = Unirest.get(mockUrl)
+            Unirest.post(baseUrl + "/urls")
+                    .field("url", mockUrl)
+                    .asEmpty();
+
+            Url actualUrl = new QUrl()
+                    .name.equalTo(mockUrl.substring(0, mockUrl.length() - 1))
+                    .findOne();
+
+            HttpResponse<String> response = Unirest
+                    .post(baseUrl + "/urls/" + actualUrl.getId() + "/checks")
                     .asString();
 
-            assertThat(response.getStatus()).isEqualTo(200);
+            assertThat(response.getStatus()).isEqualTo(302);
+            assertThat(response.getHeaders().getFirst("Location")).isEqualTo("/urls/" + actualUrl.getId());
+
+            String body = Unirest
+                    .get(baseUrl + "/urls/" + actualUrl.getId())
+                    .asString()
+                    .getBody();
+
+            assertThat(body).contains("200");
+            assertThat(body).contains(mockDescription);
+            assertThat(body).contains(mockH1);
+            assertThat(body).contains(mockTitle);
         }
     }
 }
