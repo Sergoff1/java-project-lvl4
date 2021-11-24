@@ -1,6 +1,5 @@
 INSERT INTO url (name, created_at) VALUES
     ('https://ru.hexlet.io', '2021-10-10 02:02:00'),
-    ('https://github.com', '2021-10-22 11:34:00'),
     ('https://non-existent-site.org', '2021-11-20 12:54:12');
 
 INSERT INTO url_check (status_code, title, h1, description, url_id, created_at) VALUES

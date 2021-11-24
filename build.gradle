@@ -26,6 +26,7 @@ dependencies {
     implementation 'io.javalin:javalin:4.1.1'
     implementation 'org.slf4j:slf4j-simple:1.7.32'
     implementation 'com.konghq:unirest-java:3.13.3'
+    implementation 'org.jsoup:jsoup:1.14.3'
 
     implementation 'org.thymeleaf:thymeleaf:3.0.12.RELEASE'
     implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.0.0'
