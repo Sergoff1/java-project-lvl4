@@ -106,7 +106,7 @@ public final class UrlController {
 
         HttpResponse<String> response;
 
-        try{
+        try {
             response = Unirest.get(url.getName()).asString();
 
             int statusCode = response.getStatus();
@@ -133,8 +133,7 @@ public final class UrlController {
 
             ctx.sessionAttribute("flash", "Страница успешно проверена");
             ctx.sessionAttribute("flash-type", "success");
-        } catch (UnirestException e)
-        {
+        } catch (UnirestException e) {
             ctx.sessionAttribute("flash", "Страница недоступна");
             ctx.sessionAttribute("flash-type", "danger");
         }
