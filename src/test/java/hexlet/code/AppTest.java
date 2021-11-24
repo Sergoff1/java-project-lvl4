@@ -38,12 +38,12 @@ public final class AppTest {
 
         baseUrl = "http://localhost:" + port;
 
-        existingUrl = new Url("https://ru.hexlet.io");
+        existingUrl = new Url("https://github.com");
         existingUrl.save();
 
         mockWebServer = new MockWebServer();
 
-        String expected = Files.readString(Paths.get("src", "test", "resources", "expected", "github"));
+        String expected = Files.readString(Paths.get("src", "test", "resources", "expected", "mock"));
 
         mockWebServer.enqueue(new MockResponse().setBody(expected));
 
@@ -96,13 +96,13 @@ public final class AppTest {
         @Test
         void testShowUrl() {
             HttpResponse<String> response = Unirest
-                    .get(baseUrl + "/urls/" + existingUrl.getId())
+                    .get(baseUrl + "/urls/1")
                     .asString();
             String body = response.getBody();
 
             assertThat(response.getStatus()).isEqualTo(200);
-            assertThat(body).contains(existingUrl.getName());
-//            assertThat(body).contains("Живое онлайн сообщество");
+            assertThat(body).contains("https://ru.hexlet.io");
+            assertThat(body).contains("Живое онлайн сообщество");
         }
 
         @Test
